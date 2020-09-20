@@ -1,8 +1,15 @@
+// Copyright (c) 2020 harry
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
 #define STRIP_PIN 6
 #define STRIP_LENGTH 20
+
+// Do *NOT*
 #define BRIGHTNESS 20
 
 // Strip of NeoPixels for the binary clock
