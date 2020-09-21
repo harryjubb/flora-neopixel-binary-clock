@@ -14,12 +14,14 @@
 Always expecting a strip of 20 NeoPixels for a binary-coded decimal clock
 Using a different strip length may need a different consideration for MAX_BRIGHTNESS
 
-    8    8    8
-    4  4 4  4 4
-  2 2  2 2  2 2
-  1 1  1 1  1 1
+As diagrammed:
 
-  H H  M M  S S
+    8    8    8                                                          14      7      0
+    4  4 4  4 4                                                          15  13  8   6  1
+  2 2  2 2  2 2      Equivalent to NeoPixel strip array indices:      19 16  12  9   5  2
+  1 1  1 1  1 1                                                       18 17  11 10   4  3
+
+  H H  M M  S S                                                        H  H   M  M   S  S
 
 */
 #define STRIP_LENGTH 20
