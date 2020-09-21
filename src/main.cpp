@@ -64,6 +64,8 @@ void loop()
   // https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/arduino-usage#load-demo-2943499-12
   DateTime now = rtc.now();
 
+  // TODO: Toggle switch for daylight savings time?
+
   // TODO: Set the NeoPixel "bits" according to the current time
 
   // Update the NeoPixel strip
