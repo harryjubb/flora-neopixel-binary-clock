@@ -26,12 +26,15 @@ Using a different strip length may need a different consideration for MAX_BRIGHT
 
 /*
 Do *NOT* set brightness > MAX_BRIGHTNESS (which should be 50 for a "default" 20 NeoPixel setup)
-eerkmans.nl/powering-lots-of-leds-from-arduino/
 */
 #define BRIGHTNESS 20
 
 // Strip of NeoPixels for the binary clock
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + NEO_KHZ800);
+
+// Use one color to reduce power usage by 1/3rd
+// https://learn.adafruit.com/sipping-power-with-neopixels/insights#strategy-color-selection-2378066-22
+uint32_t color = strip.Color(0, 0, 255);
 
 // Setup code here, to run once
 void setup()
