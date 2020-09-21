@@ -11,3 +11,10 @@ This project is under the [MIT license](https://opensource.org/licenses/MIT), in
 ## Installation
 
 This project was created with [PlatformIO](https://platformio.org/), and should be opened as a project in a PlatformIO IDE, such as Visual Studio Code with the PlatformIO extension.
+
+## Helpful Links
+
+- https://learn.adafruit.com/adafruit-neopixel-uberguide
+- https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use
+- https://learn.adafruit.com/sipping-power-with-neopixels
+- https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/
