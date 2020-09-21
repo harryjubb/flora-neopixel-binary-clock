@@ -44,6 +44,9 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + N
 // https://learn.adafruit.com/sipping-power-with-neopixels/insights#strategy-color-selection-2378066-22
 uint32_t color = strip.Color(0, 0, 255);
 
+// Initialise Adafruit DS3231 Real-time clock
+RTC_DS3231 rtc;
+
 // Setup code here, to run once
 void setup()
 {
@@ -55,4 +58,17 @@ void setup()
 // Main code here, to run repeatedly
 void loop()
 {
+  // Get the current time from the RTC
+  // If the time hasn't been set to the RTC (and saved by having a battery inserted)
+  // then use the Adafruit demo code to set the RTC
+  // https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/arduino-usage#load-demo-2943499-12
+  DateTime now = rtc.now();
+
+  // TODO: Set the NeoPixel "bits" according to the current time
+
+  // Update the NeoPixel strip
+  strip.show();
+
+  // Wait for the next second to elapse
+  delay(1000);
 }
