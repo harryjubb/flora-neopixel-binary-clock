@@ -41,24 +41,14 @@ uint32_t color = strip.Color(0, 0, 255);
 // Setup code here, to run once
 void setup()
 {
-  // Failsafe against setting brightness too high:
-  // Never allow setting up NeoPixels with too high a brightness
-  if (BRIGHTNESS > MAX_BRIGHTNESS)
-  {
-    return;
-  }
 
   strip.begin();
-  strip.setBrightness(BRIGHTNESS);
+  strip.setBrightness(min(BRIGHTNESS, MAX_BRIGHTNESS));
   strip.show(); // Initialize all pixels to 'off' (clearing any previous state)
 }
 
 // Main code here, to run repeatedly
 void loop()
 {
-  // Failsafe against setting brightness too high
-  if (BRIGHTNESS > MAX_BRIGHTNESS)
-  {
-    return;
-  }
+
 }
