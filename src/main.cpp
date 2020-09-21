@@ -5,6 +5,12 @@
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
+
+// Assuming the Adafruit version of the DS3231 Precision Real Time Clock (RTC)
+// then the Adafruit fork of the library must be used
+// http://github.com/adafruit/RTClib
+#include <RTClib.h>
+
 #include <MaxBrightness.h>
 
 // Pin 6 on the Flora is a PWM pin suitable for the NeoPixel data line
@@ -41,7 +47,6 @@ uint32_t color = strip.Color(0, 0, 255);
 // Setup code here, to run once
 void setup()
 {
-
   strip.begin();
   strip.setBrightness(min(BRIGHTNESS, MAX_BRIGHTNESS));
   strip.show(); // Initialize all pixels to 'off' (clearing any previous state)
@@ -50,5 +55,4 @@ void setup()
 // Main code here, to run repeatedly
 void loop()
 {
-
 }
