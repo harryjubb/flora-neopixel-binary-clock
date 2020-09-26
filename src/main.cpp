@@ -35,7 +35,7 @@ As diagrammed:
 /*
 Do *NOT* set brightness > MAX_BRIGHTNESS (which should be 50 for a "default" 20 NeoPixel setup)
 */
-#define BRIGHTNESS 20
+#define BRIGHTNESS 40
 
 // Strip of NeoPixels for the binary clock
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + NEO_KHZ800);
@@ -53,20 +53,52 @@ void setup()
   strip.begin();
   strip.setBrightness(min(BRIGHTNESS, MAX_BRIGHTNESS));
   strip.show(); // Initialize all pixels to 'off' (clearing any previous state)
+
+  Serial.begin(57600);
+
+#ifndef ESP8266
+  while (!Serial); // wait for serial port to connect. Needed for native USB
+#endif
+
+  if (! rtc.begin()) {
+    Serial.println("Couldn't find RTC");
+    Serial.flush();
+    abort();
+  }
+
+  if (rtc.lostPower()) {
+    Serial.println("RTC lost power, setting the time");
+    // When time needs to be set on a new device, or after a power loss, the
+    // following line sets the RTC to the date & time this sketch was compiled
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    // This line sets the RTC with an explicit date & time, for example to set
+    // January 21, 2014 at 3am you would call:
+    // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+  }
 }
 
 // Main code here, to run repeatedly
 void loop()
 {
   // Get the current time from the RTC
-  // If the time hasn't been set to the RTC (and saved by having a battery inserted)
-  // then use the Adafruit demo code to set the RTC
-  // https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/arduino-usage#load-demo-2943499-12
   DateTime now = rtc.now();
+
+  // Convert seconds to string, adding a leading zero if needed
+
+  // Convert minutes to string, adding a leading zero if needed
+
+  // Convert hours to string, adding a leading zero if needed
+
+  // Concatenate HHMMSS into a single time number
+
+  // Use the time number as a bitmask to check whether a NeoPixel should be on
 
   // TODO: Toggle switch for daylight savings time?
 
   // TODO: Set the NeoPixel "bits" according to the current time
+  for (int i = 0; i < 20; i++) {
+    // strip.setPixelColor()
+  }
 
   // Update the NeoPixel strip
   strip.show();
