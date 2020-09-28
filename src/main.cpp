@@ -83,7 +83,12 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + N
 // Use one color to reduce power usage by 1/3rd
 // https://learn.adafruit.com/sipping-power-with-neopixels/insights#strategy-color-selection-2378066-22
 uint32_t offColor = strip.Color(0, 0, 0);
-uint32_t onColor = strip.Color(0, 0, 255);
+uint32_t seconds1Color = strip.gamma32(strip.ColorHSV(40960));
+uint32_t seconds2Color = strip.gamma32(strip.ColorHSV(32768));
+uint32_t minutes1Color = strip.gamma32(strip.ColorHSV(24576 ));
+uint32_t minutes2Color = strip.gamma32(strip.ColorHSV(16384));
+uint32_t hours1Color = strip.gamma32(strip.ColorHSV(8192));
+uint32_t hours2Color = strip.gamma32(strip.ColorHSV(0));
 
 // Initialise Adafruit DS3231 Real-time clock
 RTC_DS3231 rtc;
@@ -122,6 +127,7 @@ void setup()
 }
 
 // Main code here, to run repeatedly
+int32_t currentColor;
 void loop()
 {
   // Get the current time from the RTC
@@ -200,7 +206,26 @@ void loop()
     Serial.print(i);
     Serial.print(": ");
     Serial.println(hhmmss & pixelMap[i] ? "ON" : "OFF");
-    strip.setPixelColor(i, hhmmss & pixelMap[i] ? onColor : offColor);
+
+    if (hhmmss & pixelMap[i]) {
+      if (i <= 3) {
+        currentColor = seconds1Color;
+      } else if (i <= 6) {
+        currentColor = seconds2Color;
+      } else if (i <= 10) {
+        currentColor = minutes1Color;
+      } else if (i <= 13) {
+        currentColor = minutes2Color;
+      } else if (i <= 17) {
+        currentColor = hours1Color;
+      } else {
+        currentColor = hours2Color;
+      }
+    } else {
+      currentColor = offColor;
+    }
+
+    strip.setPixelColor(i, currentColor);
   }
 
   // Update the NeoPixel strip
