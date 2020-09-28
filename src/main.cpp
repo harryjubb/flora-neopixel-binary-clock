@@ -78,11 +78,12 @@ unsigned long pixelMap[] = {
 };
 
 // Strip of NeoPixels for the binary clock
-// Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
 // Use one color to reduce power usage by 1/3rd
 // https://learn.adafruit.com/sipping-power-with-neopixels/insights#strategy-color-selection-2378066-22
-// uint32_t color = strip.Color(0, 0, 255);
+uint32_t offColor = strip.Color(0, 0, 0);
+uint32_t onColor = strip.Color(0, 0, 255);
 
 // Initialise Adafruit DS3231 Real-time clock
 RTC_DS3231 rtc;
@@ -90,11 +91,11 @@ RTC_DS3231 rtc;
 // Setup code here, to run once
 void setup()
 {
-  // strip.begin();
-  // strip.setBrightness(min(BRIGHTNESS, MAX_BRIGHTNESS));
-  // strip.show(); // Initialize all pixels to 'off' (clearing any previous state)
+  strip.begin();
+  strip.setBrightness(min(BRIGHTNESS, MAX_BRIGHTNESS));
+  strip.show(); // Initialize all pixels to 'off' (clearing any previous state)
 
-  // Serial.begin(57600);
+  Serial.begin(57600);
 
 #ifndef ESP8266
   while (!Serial); // wait for serial port to connect. Needed for native USB
@@ -199,11 +200,11 @@ void loop()
     Serial.print(i);
     Serial.print(": ");
     Serial.println(hhmmss & pixelMap[i] ? "ON" : "OFF");
-    // strip.setPixelColor();
+    strip.setPixelColor(i, hhmmss & pixelMap[i] ? onColor : offColor);
   }
 
   // Update the NeoPixel strip
-  // strip.show();
+  strip.show();
 
   // Wait for the next second to elapse
   Serial.println();
