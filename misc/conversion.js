@@ -61,7 +61,7 @@ console.log(hms.toString(2))
 console.log()
 
 // Map of NeoPixel indices (list indices) to the bit they represent
-// in the concatenated bitstring
+// in a concatenated bitstring representation of the clock positions
 // Written out in full for clarity
 pixelMap = [
   // Seconds small
