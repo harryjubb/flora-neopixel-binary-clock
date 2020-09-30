@@ -83,11 +83,11 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(STRIP_LENGTH, STRIP_PIN, NEO_GRB + N
 // Use one color to reduce power usage by 1/3rd
 // https://learn.adafruit.com/sipping-power-with-neopixels/insights#strategy-color-selection-2378066-22
 uint32_t offColor = strip.Color(0, 0, 0);
-uint32_t seconds1Color = strip.gamma32(strip.ColorHSV(40960));
-uint32_t seconds2Color = strip.gamma32(strip.ColorHSV(32768));
-uint32_t minutes1Color = strip.gamma32(strip.ColorHSV(24576 ));
-uint32_t minutes2Color = strip.gamma32(strip.ColorHSV(16384));
-uint32_t hours1Color = strip.gamma32(strip.ColorHSV(8192));
+uint32_t seconds1Color = strip.gamma32(strip.ColorHSV(8738 * 5));
+uint32_t seconds2Color = strip.gamma32(strip.ColorHSV(8738 * 4));
+uint32_t minutes1Color = strip.gamma32(strip.ColorHSV(8738 * 3));
+uint32_t minutes2Color = strip.gamma32(strip.ColorHSV(8738 * 2));
+uint32_t hours1Color = strip.gamma32(strip.ColorHSV(8738));
 uint32_t hours2Color = strip.gamma32(strip.ColorHSV(0));
 
 // Initialise Adafruit DS3231 Real-time clock
@@ -102,9 +102,9 @@ void setup()
 
   Serial.begin(57600);
 
-#ifndef ESP8266
-  while (!Serial); // wait for serial port to connect. Needed for native USB
-#endif
+// #ifndef ESP8266
+//   while (!Serial); // wait for serial port to connect. Needed for native USB
+// #endif
 
   if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
